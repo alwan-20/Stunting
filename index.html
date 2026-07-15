@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5" />
+    <title>Buku Saku · Mainan Tradisional Cegah Stunting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(145deg, #fce4ec 0%, #e1f0fa 100%);
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* ----- BACKGROUND ANIMASI KARTUN (FLOATING ICONS) ----- */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .bg-animation .floating {
+            position: absolute;
+            font-size: 3.5rem;
+            animation: floatUp 22s linear infinite;
+            opacity: 0.2;
+            user-select: none;
+        }
+
+        .bg-animation .floating:nth-child(1) {
+            left: 3%;
+            animation-delay: 0s;
+            font-size: 4.2rem;
+        }
+        .bg-animation .floating:nth-child(2) {
+            left: 12%;
+            animation-delay: 2.5s;
+            font-size: 3rem;
+        }
+        .bg-animation .floating:nth-child(3) {
+            left: 22%;
+            animation-delay: 5s;
+            font-size: 5rem;
+        }
+        .bg-animation .floating:nth-child(4) {
+            left: 35%;
+            animation-delay: 7.5s;
+            font-size: 3.8rem;
+        }
+        .bg-animation .floating:nth-child(5) {
+            left: 48%;
+            animation-delay: 10s;
+            font-size: 4.5rem;
+        }
+        .bg-animation .floating:nth-child(6) {
+            left: 60%;
+            animation-delay: 2s;
+            font-size: 3.2rem;
+        }
+        .bg-animation .floating:nth-child(7) {
+            left: 72%;
+            animation-delay: 6s;
+            font-size: 4.8rem;
+        }
+        .bg-animation .floating:nth-child(8) {
+            left: 84%;
+            animation-delay: 9s;
+            font-size: 3.5rem;
+        }
+        .bg-animation .floating:nth-child(9) {
+            left: 92%;
+            animation-delay: 12s;
+            font-size: 4rem;
+        }
+        .bg-animation .floating:nth-child(10) {
+            left: 8%;
+            animation-delay: 15s;
+            font-size: 5.2rem;
+        }
+        .bg-animation .floating:nth-child(11) {
+            left: 55%;
+            animation-delay: 18s;
+            font-size: 3.8rem;
+        }
+        .bg-animation .floating:nth-child(12) {
+            left: 78%;
+            animation-delay: 20s;
+            font-size: 4.5rem;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(110vh) rotate(0deg) scale(0.7);
+                opacity: 0.15;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(720deg) scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        /* ----- KARAKTER LUCU (BOUNCE) ----- */
+        .character-wrap {
+            position: fixed;
+            bottom: 24px;
+            right: 28px;
+            z-index: 15;
+            font-size: 4.8rem;
+            animation: bounceChar 2.8s ease-in-out infinite;
+            filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.15));
+            cursor: default;
+            user-select: none;
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        @keyframes bounceChar {
+            0%,
+            100% {
+                transform: translateY(0) rotate(-3deg) scale(1);
+            }
+            50% {
+                transform: translateY(-22px) rotate(3deg) scale(1.04);
+            }
+        }
+
+        /* ----- CONTAINER SLIDE ----- */
+        .container {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            max-width: 1120px;
+            max-height: 96vh;
+            padding: 14px 18px;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeSlide 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 60px 60px 40px 40px;
+            padding: 28px 32px 30px;
+            box-shadow: 0 30px 70px rgba(42, 60, 90, 0.18);
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            max-height: 84vh;
+            overflow-y: auto;
+            transition: all 0.3s;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        /* Scrollbar cantik */
+        .slide::-webkit-scrollbar {
+            width: 7px;
+        }
+        .slide::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+        }
+        .slide::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #f06292, #d81b60);
+            border-radius: 20px;
+        }
+
+        /* ----- TYPOGRAPHY ----- */
+        .slide-title {
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: #0b2b4a;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .slide-title i {
+            color: #d81b60;
+            font-size: 2.3rem;
+        }
+
+        .slide-sub {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1a4b74;
+            background: #e1f0fa90;
+            padding: 8px 22px;
+            border-radius: 60px;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .badge-info {
+            background: #fce4ec;
+            border-radius: 30px;
+            padding: 16px 22px;
+            border-left: 6px solid #d81b60;
+            margin: 8px 0 16px;
+        }
+        .badge-info p {
+            line-height: 1.6;
+        }
+
+        .list-icon {
+            list-style: none;
+            margin: 6px 0;
+        }
+        .list-icon li {
+            margin-bottom: 10px;
+            font-weight: 500;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .list-icon li i {
+            color: #d81b60;
+            font-size: 1.2rem;
+            min-width: 24px;
+            margin-top: 3px;
+        }
+
+        /* ----- GRID UNTUK KONTEN ----- */
+        .grid-2-slide {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin: 14px 0 8px;
+        }
+
+        @media (max-width: 760px) {
+            .grid-2-slide {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .slide-title {
+                font-size: 1.6rem;
+            }
+            .slide {
+                padding: 20px 16px;
+                border-radius: 40px;
+                max-height: 86vh;
+            }
+            .character-wrap {
+                font-size: 3.5rem;
+                bottom: 14px;
+                right: 16px;
+            }
+            .btn-nav {
+                padding: 10px 16px;
+                font-size: 0.95rem;
+                min-width: 90px;
+            }
+            .container {
+                padding: 8px 10px;
+            }
+            .game-grid-detail {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* ----- CARD GAME (untuk daftar permainan) ----- */
+        .card-game {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 30px;
+            padding: 16px 18px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            transition: 0.25s;
+            cursor: pointer;
+            position: relative;
+        }
+        .card-game:hover {
+            background: #ffffffd0;
+            transform: scale(1.03);
+            box-shadow: 0 8px 24px rgba(216, 27, 96, 0.15);
+            border-color: #d81b60;
+        }
+        .card-game h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1a3b5e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+        .card-game h4 i {
+            color: #1a73e8;
+            font-size: 1.4rem;
+        }
+        .card-game .focus {
+            background: #e1f0fa;
+            padding: 3px 16px;
+            border-radius: 30px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #0b3c6b;
+            display: inline-block;
+            margin: 4px 0 6px;
+        }
+        .card-game .stunt-link {
+            background: #fce4ec;
+            padding: 3px 16px;
+            border-radius: 30px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #a01144;
+            display: inline-block;
+            margin-top: 6px;
+            border: 1px solid #f8bbd0;
+        }
+        .card-game p {
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+        .card-game .click-hint {
+            position: absolute;
+            bottom: 8px;
+            right: 16px;
+            font-size: 0.7rem;
+            color: #1a73e8;
+            opacity: 0.6;
+            font-weight: 600;
+        }
+
+        /* ----- TABEL JADWAL ----- */
+        .table-jadwal-slide {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .table-jadwal-slide th {
+            background: #d81b60;
+            color: white;
+            padding: 10px 8px;
+            font-weight: 700;
+        }
+        .table-jadwal-slide td {
+            padding: 10px 8px;
+            background: rgba(255, 255, 255, 0.6);
+            border-bottom: 1px solid #b8d4ed;
+            text-align: center;
+        }
+        .table-jadwal-slide tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ----- NAVIGASI ----- */
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 22px;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-nav {
+            background: linear-gradient(135deg, #f06292, #d81b60);
+            border: none;
+            padding: 13px 30px;
+            border-radius: 60px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(216, 27, 96, 0.35);
+            transition: 0.25s;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            font-family: 'Quicksand', sans-serif;
+            letter-spacing: 0.3px;
+            flex: 1;
+            justify-content: center;
+            min-width: 130px;
+        }
+
+        .btn-nav:hover {
+            transform: scale(1.04) translateY(-3px);
+            box-shadow: 0 12px 34px rgba(216, 27, 96, 0.45);
+        }
+        .btn-nav:active {
+            transform: scale(0.96);
+        }
+
+        .btn-nav.secondary {
+            background: linear-gradient(135deg, #64b5f6, #1a73e8);
+            box-shadow: 0 8px 24px rgba(26, 115, 232, 0.35);
+        }
+        .btn-nav.secondary:hover {
+            box-shadow: 0 12px 34px rgba(26, 115, 232, 0.45);
+        }
+
+        .btn-nav:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-nav.reset {
+            background: linear-gradient(135deg, #f9a825, #f57f17);
+            box-shadow: 0 8px 24px rgba(245, 127, 23, 0.35);
+        }
+        .btn-nav.reset:hover {
+            box-shadow: 0 12px 34px rgba(245, 127, 23, 0.45);
+        }
+
+        .page-indicator {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #1a3b5e;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 8px 24px;
+            border-radius: 60px;
+            border: 1px solid #b0d4f0;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .page-indicator i {
+            color: #d81b60;
+        }
+
+        .emoji-big {
+            font-size: 2.8rem;
+            display: inline-block;
+            animation: wiggle 2s infinite;
+        }
+
+        @keyframes wiggle {
+            0%,
+            100% {
+                transform: rotate(-4deg);
+            }
+            50% {
+                transform: rotate(4deg);
+            }
+        }
+
+        .text-center {
+            text-align: center;
+        }
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mt-12 {
+            margin-top: 12px;
+        }
+        .bg-soft-blue {
+            background: #e3f2fd80;
+            border-radius: 30px;
+            padding: 14px 18px;
+        }
+        .flex-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .badge-tag {
+            background: #ffffff90;
+            padding: 4px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* ----- MODAL / POPUP DETAIL PERMAINAN ----- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(6px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeInModal 0.3s ease;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeInModal {
+            0% {
+                opacity: 0;
+                transform: scale(0.92);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-content {
+            background: #ffffff;
+            border-radius: 50px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 36px 40px 32px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 20px;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #d81b60;
+            border-radius: 20px;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 2rem;
+            color: #d81b60;
+            cursor: pointer;
+            background: #fce4ec;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            border: none;
+            font-weight: 700;
+        }
+        .modal-close:hover {
+            background: #d81b60;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0b2b4a;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 12px;
+            padding-right: 50px;
+        }
+        .modal-title i {
+            color: #1a73e8;
+            font-size: 2.2rem;
+        }
+
+        .modal-sub {
+            font-weight: 600;
+            color: #1a4b74;
+            background: #e1f0fa;
+            padding: 6px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 16px;
+            font-size: 0.95rem;
+        }
+
+        .modal-body {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #1f3b57;
+        }
+        .modal-body p {
+            margin-bottom: 12px;
+        }
+        .modal-body ul {
+            list-style: none;
+            padding: 0;
+        }
+        .modal-body ul li {
+            padding: 6px 0 6px 30px;
+            position: relative;
+        }
+        .modal-body ul li::before {
+            content: "✦";
+            position: absolute;
+            left: 4px;
+            color: #d81b60;
+            font-weight: 700;
+        }
+        .modal-body .highlight-box {
+            background: #fce4ec;
+            border-radius: 24px;
+            padding: 14px 20px;
+            margin: 12px 0;
+            border-left: 5px solid #d81b60;
+        }
+        .modal-body .highlight-box strong {
+            color: #a01144;
+        }
+
+        .game-grid-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .modal-content {
+                padding: 24px 18px 26px;
+                border-radius: 32px;
+            }
+            .modal-title {
+                font-size: 1.5rem;
+                padding-right: 40px;
+            }
+            .modal-close {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+                top: 14px;
+                right: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== BACKGROUND FLOATING ICONS ===== -->
+    <div class="bg-animation">
+        <div class="floating">🧸</div>
+        <div class="floating">🪁</div>
+        <div class="floating">🎈</div>
+        <div class="floating">🪀</div>
+        <div class="floating">🧩</div>
+        <div class="floating">🎨</div>
+        <div class="floating">🏀</div>
+        <div class="floating">🪅</div>
+        <div class="floating">🎯</div>
+        <div class="floating">🧸</div>
+        <div class="floating">🎠</div>
+        <div class="floating">🪁</div>
+    </div>
+
+    <!-- ===== KARAKTER LUCU ===== -->
+    <div class="character-wrap" aria-hidden="true">🐼🧸</div>
+
+    <!-- ===== MODAL / POPUP DETAIL ===== -->
+    <div class="modal-overlay" id="modalDetail">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">✕</button>
+            <div class="modal-title" id="modalTitle"><i class="fas fa-gamepad"></i> <span id="modalGameName">Ular Tangga</span></div>
+            <div class="modal-sub" id="modalFocus">Fokus Stimulasi: Logika &amp; Interpersonal</div>
+            <div class="modal-body" id="modalBody">
+                <!-- konten diisi oleh JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CONTAINER SLIDE ===== -->
+    <div class="container">
+
+        <!-- ===================== SLIDE 1 : PENDAHULUAN & EDUKASI ===================== -->
+        <div class="slide active" id="slide1">
+            <div class="slide-title">
+                <i class="fas fa-seedling"></i> Buku Saku · 10 Mainan Tradisional
+                <span style="font-size:1rem; background:#d81b6015; padding:4px 16px; border-radius:40px; margin-left:4px;">KKN 2026</span>
+            </div>
+            <div class="slide-sub"><i class="fas fa-child"></i> Stimulasi Anak Bebas Stunting · Desa Margaluyu</div>
+
+            <div class="badge-info">
+                <p style="font-weight:700; font-size:1.1rem;"><i class="fas fa-circle-info" style="color:#1a73e8;"></i> Apa itu Stunting?</p>
+                <p style="margin-top:4px; line-height:1.7;">Stunting adalah kondisi tinggi badan anak lebih rendah dari rata-rata seusianya akibat kekurangan nutrisi kronis. Bukan hanya fisik, tetapi juga memengaruhi kesiapan belajar dan perkembangan jangka panjang. <strong>Bermain tradisional</strong> adalah salah satu solusi stimulasi yang menyenangkan!</p>
+            </div>
+
+            <div class="grid-2-slide">
+                <div>
+                    <p style="font-weight:700; color:#0b3c6b;"><i class="fas fa-utensils" style="color:#d81b60;"></i> Penyebab Utama</p>
+                    <ul class="list-icon">
+                        <li><i class="fas fa-times-circle"></i> Malnutrisi kronis, kurang protein &amp; vitamin</li>
+                        <li><i class="fas fa-water"></i> Sanitasi buruk, akses kesehatan minim</li>
+                        <li><i class="fas fa-brain"></i> Stimulasi psikososial kurang</li>
+                        <li><i class="fas fa-users"></i> Pola asuh, infeksi, dan penyakit bawaan</li>
+                    </ul>
+                </div>
+                <div>
+                    <p style="font-weight:700; color:#0b3c6b;"><i class="fas fa-heartbeat" style="color:#d81b60;"></i> Dampak Stunting</p>
+                    <ul class="list-icon">
+                        <li><i class="fas fa-clock"></i> <strong>Jangka pendek:</strong> Gangguan otak, metabolisme, pertumbuhan fisik</li>
+                        <li><i class="fas fa-hourglass-end"></i> <strong>Jangka panjang:</strong> Kognitif menurun, imun rendah, risiko penyakit degeneratif</li>
+                    </ul>
+                    <div class="bg-soft-blue mt-8">
+                        <i class="fas fa-puzzle-piece" style="color:#1a73e8;"></i> <strong>Peran bermain:</strong> Stimulasi teratur membangun koneksi otak &amp; kecerdasan majemuk.
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12" style="background:#e1f0fa60; border-radius:60px; padding:10px;">
+                <span class="emoji-big">🧸</span> <span style="font-weight:600;">Slide 1 dari 4 — Klik "Selanjutnya" untuk lihat 10 permainan!</span>
+            </div>
+
+            <div class="nav-controls">
+                <span></span>
+                <span class="page-indicator"><i class="fas fa-circle"></i> 1 / 4</span>
+                <button class="btn-nav secondary" id="next1">Selanjutnya <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 2 : 10 PERMAINAN ===================== -->
+        <div class="slide" id="slide2">
+            <div class="slide-title">
+                <i class="fas fa-gamepad" style="color:#1a73e8;"></i> 10 Permainan Tradisional
+                <span style="font-size:1rem; background:#1a73e815; padding:4px 16px; border-radius:40px;">stimulasi fisik &amp; sosial</span>
+            </div>
+            <div class="slide-sub"><i class="fas fa-arrow-right"></i> Klik salah satu permainan untuk melihat detail lengkap!</div>
+
+            <div class="game-grid-detail" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                <!-- Data permainan akan di-generate oleh JS -->
+            </div>
+
+            <div class="nav-controls">
+                <button class="btn-nav secondary" id="prev2"><i class="fas fa-arrow-left"></i> Sebelumnya</button>
+                <span class="page-indicator"><i class="fas fa-circle"></i> 2 / 4</span>
+                <button class="btn-nav" id="next2">Selanjutnya <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 3 : TIPS & JADWAL ===================== -->
+        <div class="slide" id="slide3">
+            <div class="slide-title">
+                <i class="fas fa-hand-holding-heart" style="color:#d81b60;"></i> Tips Orang Tua &amp; Guru
+            </div>
+            <div class="slide-sub"><i class="fas fa-lightbulb"></i> Panduan praktis mendampingi anak bermain tanpa gadget</div>
+
+            <div class="grid-2-slide">
+                <div>
+                    <ul class="list-icon">
+                        <li><i class="fas fa-clock"></i> Sediakan 10–30 menit bermain tanpa gadget setiap hari.</li>
+                        <li><i class="fas fa-child"></i> Kenalkan satu permainan bertahap sesuai usia anak.</li>
+                        <li><i class="fas fa-users"></i> Libatkan anak-anak lain untuk stimulasi sosial &amp; emosional.</li>
+                        <li><i class="fas fa-heart"></i> Beri pujian &amp; dukungan, meskipun belum sempurna.</li>
+                        <li><i class="fas fa-eye"></i> Amati gerakan fisik &amp; interaksi. Jika ada tanda keterlambatan, segera konsultasi ke bidan/posyandu.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color:#0b3c6b; margin-bottom:10px;"><i class="fas fa-calendar-alt"></i> Jadwal Stimulasi Sederhana</h4>
+                    <table class="table-jadwal-slide">
+                        <tr><th>Hari</th><th>Permainan</th><th>Fokus</th></tr>
+                        <tr><td>Senin</td><td>Congklak</td><td>Logika &amp; sosial</td></tr>
+                        <tr><td>Selasa</td><td>Engklek</td><td>Gerak &amp; spasial</td></tr>
+                        <tr><td>Rabu</td><td>Lompat Tali</td><td>Gerak &amp; musikal</td></tr>
+                        <tr><td>Kamis</td><td>Petak Umpet</td><td>Spasial &amp; intrapersonal</td></tr>
+                        <tr><td>Jum'at</td><td>Ular Tangga</td><td>Logika &amp; interpersonal</td></tr>
+                    </table>
+                    <p style="font-size:0.8rem; margin-top:8px; background:#e1f0fa80; padding:6px 14px; border-radius:30px;"><i class="fas fa-info-circle"></i> Variasi stimulasi setiap hari untuk perkembangan optimal.</p>
+                </div>
+            </div>
+
+            <div class="nav-controls">
+                <button class="btn-nav secondary" id="prev3"><i class="fas fa-arrow-left"></i> Sebelumnya</button>
+                <span class="page-indicator"><i class="fas fa-circle"></i> 3 / 4</span>
+                <button class="btn-nav" id="next3">Selanjutnya <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- ===================== SLIDE 4 : PENUTUP & DAFTAR PUSTAKA ===================== -->
+        <div class="slide" id="slide4">
+            <div class="slide-title">
+                <i class="fas fa-flag-checkered" style="color:#1a73e8;"></i> Mari Cegah Stunting dengan Bermain!
+            </div>
+            <div class="slide-sub"><i class="fas fa-quote-left"></i> Bermain tradisional: langkah kecil, dampak besar <i class="fas fa-quote-right"></i></div>
+
+            <div style="background:linear-gradient(135deg, #fce4ec, #e1f0fa); border-radius:40px; padding:22px 24px; margin:10px 0 18px;">
+                <p style="font-size:1.2rem; font-weight:700; color:#0b2b4a;"><i class="fas fa-seedling" style="color:#d81b60;"></i> KKN Kelompok 13 · Desa Margaluyu</p>
+                <p>Universitas Muhammadiyah Sukabumi · Tahun 2026</p>
+                <p style="margin-top:10px;"><i class="fas fa-book-open"></i> <strong>Daftar Pustaka:</strong> Kemenkes RI (2023, 2018), IDAI (2015), UNICEF/WHO (2020), Biofarma (2024).</p>
+                <div class="flex-wrap mt-8">
+                    <span class="badge-tag"><i class="fas fa-check-circle" style="color:#1a73e8;"></i> Stimulasi rutin</span>
+                    <span class="badge-tag"><i class="fas fa-heart" style="color:#d81b60;"></i> Penuh kasih sayang</span>
+                    <span class="badge-tag"><i class="fas fa-child"></i> Anak bebas stunting</span>
+                </div>
+            </div>
+
+            <div class="text-center" style="font-size:2.8rem; letter-spacing:12px; margin:8px 0;">
+                🧸 🪁 🎈 🪀 🧩
+            </div>
+
+            <div class="nav-controls">
+                <button class="btn-nav secondary" id="prev4"><i class="fas fa-arrow-left"></i> Sebelumnya</button>
+                <span class="page-indicator"><i class="fas fa-circle"></i> 4 / 4</span>
+                <button class="btn-nav reset" id="resetBtn"><i class="fas fa-redo"></i> Mulai ulang</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            // ========== DATA PERMAINAN ==========
+            const gamesData = [{
+                id: 1,
+                name: 'Ular Tangga',
+                icon: 'fa-dice',
+                focus: 'Logika &amp; Interpersonal',
+                description: 'Permainan papan klasik yang mengajarkan anak menghitung langkah dadu dan belajar menerima giliran.',
+                caraMain: [
+                    'Siapkan papan berpetak 1-100 berisi gambar ular dan tangga.',
+                    'Setiap pemain melempar dadu secara bergiliran dan menjalankan bidak sesuai angka yang muncul.',
+                    'Jika bidak berhenti di kotak tepat pada kepala ular, bidak turun ke kotak yang lebih rendah.',
+                    'Jika bidak berhenti di bawah tangga, maka bidak naik ke kotak yang lebih tinggi.',
+                    'Pemenang ditentukan oleh pemain pertama yang mencapai kotak terakhir.'
+                ],
+                kaitanStunting: [
+                    'Melatih kemampuan berhitung serta kesabaran anak sejak dini.',
+                    'Melatih anak mengelola emosi ketika menang ataupun kalah.',
+                    'Stimulasi kognitif dan sosial emosional sederhana agar meminimalisir terjadinya penurunan kemampuan kognitif pada anak akibat stunting.'
+                ]
+            }, {
+                id: 2,
+                name: 'Engklek',
+                icon: 'fa-person-walking',
+                focus: 'Gerak &amp; Visual-Spasial',
+                description: 'Permainan lompat dengan satu kaki yang melatih keseimbangan dan koordinasi tubuh.',
+                caraMain: [
+                    'Melakukan hompimpa atau suit untuk menentukan pemain pertama.',
+                    'Pemain pertama melemparkan gaconya ke kotak yang paling awal dan tidak boleh menyentuh garis.',
+                    'Pemain melompati kotak-kotak tersebut dengan satu kaki yang tidak diisi oleh gaco hingga tuntas.',
+                    'Jika pemain menginjak kotak yang berisi gaco dalam kotak maka pemain dinyatakan kalah.',
+                    'Setelah pemain mencapai kotak paling ujung, lalu harus berbalik arah untuk kembali ke garis awal.',
+                    'Jika pemain berhasil melempar gaco ke kotak 2, 3, dan seterusnya hingga seluruh kotak selesai dilewati maka dinyatakan menang.'
+                ],
+                kaitanStunting: [
+                    'Melatih keseimbangan tubuh, kekuatan fisik serta kelenturan otot anak.',
+                    'Membantu mengoptimalkan pertumbuhan fisik anak.',
+                    'Keduanya merupakan bagian dari pencegahan dampak stunting pada perkembangan tubuh.'
+                ]
+            }, {
+                id: 3,
+                name: 'Congklak',
+                icon: 'fa-bowl-food',
+                focus: 'Logika &amp; Interpersonal',
+                description: 'Permainan strategi dengan biji-bijian yang melatih hitungan dan kemampuan bersosialisasi.',
+                caraMain: [
+                    'Siapkan papan congklak yang memiliki lubang-lubang kecil dan dua lubang besar yang diisi biji congklak dengan merata.',
+                    'Pemain mengambil seluruh biji congklak dari satu lubang lalu membagikannya satu per satu ke lubang berikutnya terus menerus sampai habis dan berhenti.',
+                    'Jika biji terakhir jatuh di lubang besar miliknya sendiri, maka pemain mendapat giliran tambahan.',
+                    'Permainan berakhir saat seluruh biji di lubang kecil habis, pemenang adalah pemain dengan biji terbanyak di lubang besarnya.'
+                ],
+                kaitanStunting: [
+                    'Melatih daya pikir logika anak.',
+                    'Membangun kecerdasan sosial anak.',
+                    'Kombinasi dari seluruh permainan ini untuk membantu meningkatkan kemampuan kognitif dan prestasi anak.'
+                ]
+            }, {
+                id: 4,
+                name: 'Bola Bekel',
+                icon: 'fa-basketball',
+                focus: 'Motorik &amp; Logika',
+                description: 'Permainan yang mengandalkan koordinasi mata dan tangan untuk mengambil biji bekel.',
+                caraMain: [
+                    'Pemain melempar bola bekel ke atas sambil menyebar biji bekel di lantai.',
+                    'Pemain melempar bola, lalu mengambil biji bekel satu per satu sampai habis tanpa menyentuh biji lain.',
+                    'Ulangi proses dengan mengambil biji dua-dua, tiga-tiga, hingga sekaligus semua.',
+                    'Putar balikan posisi bola bekel (telentang/tengkurap) sebelum diambil pada babak selanjutnya.'
+                ],
+                kaitanStunting: [
+                    'Melatih koordinasi mata dan tangan.',
+                    'Meningkatkan konsentrasi tinggi dalam waktu singkat.',
+                    'Melatih koordinasi sensor motorik.',
+                    'Kombinasi ini dapat berkontribusi pada pematangan fungsi saraf motorik anak yang penting di tengah risiko gangguan saraf akibat stunting.'
+                ]
+            }, {
+                id: 5,
+                name: 'Lompat Tali',
+                icon: 'fa-arrow-up',
+                focus: 'Gerak &amp; Musikal',
+                description: 'Permainan melompat dengan tali yang melatih daya tahan dan ritme gerak anak.',
+                caraMain: [
+                    'Dua orang berdiri saling berhadapan sambil memegang kedua ujung tali.',
+                    'Tali diposisikan pada ketinggian tertentu, dimulai dari posisi paling rendah hingga yang paling tinggi (melewati kepala dan tangan diangkat ke atas).',
+                    'Pemain bergantian melompati tali tanpa menyentuh atau menginjak tali.',
+                    'Jika pemain berhasil melewati tali, permainan dilanjutkan dengan menaikkan ketinggian tali secara bertahap: Mata kaki, Lutut, Pinggang, Dada, Kepala, Tali diangkat tangan lurus ke atas.',
+                    'Pemain yang mampu melewati ketinggian tali paling tinggi tanpa melakukan kesalahan menjadi pemenang.'
+                ],
+                kaitanStunting: [
+                    'Melatih daya tahan tubuh, kekuatan otot kaki, dan ritme gerak anak, sehingga mendukung pertumbuhan fisik anak.',
+                    'Menstimulasi kecerdasan musikal-ritmis yang turut berperan dalam kemampuan belajar anak.'
+                ]
+            }, {
+                id: 6,
+                name: 'Gobak Sodor',
+                icon: 'fa-people-arrows',
+                focus: 'Gerak &amp; Kerja sama',
+                description: 'Permainan tim yang membutuhkan kecepatan, kelincahan, dan strategi kelompok.',
+                caraMain: [
+                    'Buat lapangan berbentuk persegi panjang (9x4 meter) minimal, dibagi menjadi 6 petak.',
+                    'Bagi pemain menjadi dua tim isinya 3-5 orang per tim.',
+                    'Tim penjaga menjaga garis horizontal dan vertikal, sementara tim penyerang harus menembus semua garis depan hingga belakang tanpa tersentuh.'
+                ],
+                kaitanStunting: [
+                    'Melatih kemampuan motorik kasar.',
+                    'Mengembangkan kemampuan bekerja sama dan berinteraksi dengan teman.',
+                    'Stimulasi motorik dan sosial pada anak untuk mengoptimalkan tumbuh kembang anak sebagai bagian intervensi stunting.'
+                ]
+            }, {
+                id: 7,
+                name: 'Kelereng',
+                icon: 'fa-circle',
+                focus: 'Logika &amp; Motorik',
+                description: 'Permainan menyentil kelereng yang melatih konsentrasi dan strategi.',
+                caraMain: [
+                    'Gambar lingkaran kecil di tanah dan taruh beberapa kelereng di dalamnya.',
+                    'Lempar kelereng dari jarak jauh, yang paling dekat dengan lingkaran main duluan.',
+                    'Gunakan satu kelereng utama untuk menyentil kelereng di dalam lingkaran.',
+                    'Kelereng taruhan yang berhasil terkeluar dari lingkaran menjadi milik penyentil.',
+                    'Jika sentilan meleset dari sasaran, giliran bermain langsung pindah ke pemain berikutnya.'
+                ],
+                kaitanStunting: [
+                    'Melatih koordinasi motorik halus dan konsentrasi anak.',
+                    'Mengembangkan kemampuan berpikir strategis dan pemecahan masalah.',
+                    'Stimulasi motorik dan kognitif yang dapat mendukung perkembangan anak.'
+                ]
+            }, {
+                id: 8,
+                name: 'Bentengan',
+                icon: 'fa-flag',
+                focus: 'Emosi &amp; Gerak',
+                description: 'Permainan berebut benteng yang melatih kerja sama dan pengendalian diri.',
+                caraMain: [
+                    'Menentukan dua tim yang akan bermain terdiri dari beberapa orang.',
+                    'Lalu nanti masing-masing memilih sebuah objek seperti tiang atau pohon sebagai benteng.',
+                    'Pemain akan keluar dari markas menuju ke area lawan untuk mengejar dan menyentuh anggota tim lawan agar mereka menjadi wartawan.',
+                    'Pemain yang keluar lebih akhir dapat menghalangi pemain lawan yang sudah berada di lapangan lebih dulu.',
+                    'Jika berhasil disentuh pemain yang setim.'
+                ],
+                kaitanStunting: [
+                    'Melatih kemampuan sosial, kerja sama, dan komunikasi antar teman.',
+                    'Meningkatkan aktivitas fisik yang mendukung perkembangan motorik kasar anak.'
+                ]
+            }, {
+                id: 9,
+                name: 'Petak Umpet',
+                icon: 'fa-mask',
+                focus: 'Spasial &amp; Intrapersonal',
+                description: 'Permainan mencari dan bersembunyi yang melatih keberanian dan kemandirian.',
+                caraMain: [
+                    'Pemain terdiri dari minimal 2 orang.',
+                    'Satu pemain nanti akan bertugas sebagai pencari dan menghitung hingga jumlah tertentu sambil menutup mata.',
+                    'Lalu pemain lain nanti akan mencari tempat persembunyian di sekitar area permainan.',
+                    'Setelah selesai menghitung, pencari akan mencari pemain yang sedang bersembunyi sampai semua ditemukan.',
+                    'Jika pemain pertama yang ditemukan oleh pencari nanti otomatis akan menjadi pencari pada putaran selanjutnya.'
+                ],
+                kaitanStunting: [
+                    'Melatih kemampuan anak untuk berpikir, mengamati lingkungan dan memecahkan masalah.',
+                    'Meningkatkan aktivitas fisik mulai gerakan berlari dan mencari tempat persembunyian.',
+                    'Stimulasi motorik dan kognitif ini dapat membantu mengoptimalkan perkembangan anak yang merupakan bagian dari pencegahan stunting.'
+                ]
+            }, {
+                id: 10,
+                name: 'ABC Lima Dasar',
+                icon: 'fa-font',
+                focus: 'Bahasa &amp; Logika',
+                description: 'Permainan kata yang memperkaya kosakata dan kemampuan berpikir cepat.',
+                caraMain: [
+                    'Pemain minimal terdiri dari 2 orang dalam satu kali permainan.',
+                    'Permain bersama-sama mengucapkan "ABC Lima Dasar".',
+                    'Saat pemain berhenti pada satu huruf tertentu, pemain bisa menyebutkan objek yang dimaksud seperti nama hewan, buah-buahan, kota dll.',
+                    'Pemain yang tidak dapat menjawab akan dianggap kalah.'
+                ],
+                kaitanStunting: [
+                    'Melatih kemampuan bahasa, daya ingat, dan konsentrasi anak.',
+                    'Mengembangkan kemampuan berpikir cepat dan kreativitas dalam menjawab.',
+                    'Stimulasi bahasa dan kognitif yang dilakukan secara konsisten akan membantu mengoptimalkan perkembangan anak sebagai bagian dari upaya pencegahan stunting.'
+                ]
+            }];
+
+            // ========== RENDER GAME CARD DI SLIDE 2 ==========
+            const gameGrid = document.querySelector('.game-grid-detail');
+            if (gameGrid) {
+                gameGrid.innerHTML = '';
+                gamesData.forEach(game => {
+                    const card = document.createElement('div');
+                    card.className = 'card-game';
+                    card.setAttribute('data-game-id', game.id);
+                    card.innerHTML = `
+                        <h4><i class="fas ${game.icon}"></i> ${game.name}</h4>
+                        <div class="focus">${game.focus}</div>
+                        <p>${game.description}</p>
+                        <span class="stunt-link"><i class="fas fa-check-circle"></i> Klik untuk detail</span>
+                        <span class="click-hint"><i class="fas fa-hand-pointer"></i> klik</span>
+                    `;
+                    card.addEventListener('click', function() {
+                        openModal(game.id);
+                    });
+                    gameGrid.appendChild(card);
+                });
+            }
+
+            // ========== MODAL FUNGSI ==========
+            const modalOverlay = document.getElementById('modalDetail');
+            const modalClose = document.getElementById('modalClose');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalGameName = document.getElementById('modalGameName');
+            const modalFocus = document.getElementById('modalFocus');
+            const modalBody = document.getElementById('modalBody');
+
+            function openModal(gameId) {
+                const game = gamesData.find(g => g.id === gameId);
+                if (!game) return;
+
+                // Set judul
+                modalGameName.textContent = game.name;
+                modalTitle.innerHTML = `<i class="fas ${game.icon}"></i> <span id="modalGameName">${game.name}</span>`;
+
+                // Set fokus
+                modalFocus.textContent = 'Fokus Stimulasi: ' + game.focus.replace(/&amp;/g, '&');
+
+                // Set body
+                let html = `
+                    <p><strong>Deskripsi:</strong> ${game.description}</p>
+                    <div class="highlight-box">
+                        <strong><i class="fas fa-play"></i> Cara Bermain:</strong>
+                        <ul>
+                            ${game.caraMain.map(step => `<li>${step}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div style="background:#e3f2fd; border-radius:24px; padding:14px 20px; margin-top:12px;">
+                        <strong><i class="fas fa-heartbeat" style="color:#d81b60;"></i> Kaitan dengan Stunting:</strong>
+                        <ul>
+                            ${game.kaitanStunting.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                modalBody.innerHTML = html;
+
+                // Tampilkan modal
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                modalOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // Event close modal
+            modalClose.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+
+            // Tutup dengan ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+
+            // ========== SLIDE NAVIGASI ==========
+            const slides = {
+                slide1: document.getElementById('slide1'),
+                slide2: document.getElementById('slide2'),
+                slide3: document.getElementById('slide3'),
+                slide4: document.getElementById('slide4')
+            };
+
+            const totalSlides = 4;
+            let current = 1;
+
+            function showSlide(num) {
+                Object.values(slides).forEach(s => s.classList.remove('active'));
+                const key = 'slide' + num;
+                if (slides[key]) slides[key].classList.add('active');
+                current = num;
+                const container = document.querySelector('.container');
+                if (container) container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // Next
+            document.getElementById('next1').addEventListener('click', function() { showSlide(2); });
+            document.getElementById('next2').addEventListener('click', function() { showSlide(3); });
+            document.getElementById('next3').addEventListener('click', function() { showSlide(4); });
+
+            // Prev
+            document.getElementById('prev2').addEventListener('click', function() { showSlide(1); });
+            document.getElementById('prev3').addEventListener('click', function() { showSlide(2); });
+            document.getElementById('prev4').addEventListener('click', function() { showSlide(3); });
+
+            // Reset
+            document.getElementById('resetBtn').addEventListener('click', function() { showSlide(1); });
+
+            // Keyboard
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' && !modalOverlay.classList.contains('active')) {
+                    e.preventDefault();
+                    if (current < totalSlides) showSlide(current + 1);
+                } else if (e.key === 'ArrowLeft' && !modalOverlay.classList.contains('active')) {
+                    e.preventDefault();
+                    if (current > 1) showSlide(current - 1);
+                }
+            });
+
+            // Tampilkan slide pertama
+            showSlide(1);
+        })();
+    </script>
+
+</body>
+</html>
